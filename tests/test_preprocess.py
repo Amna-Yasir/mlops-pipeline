@@ -1,18 +1,15 @@
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-
-
 import pandas as pd
 from src.preprocess import preprocess_data
 
-def test_handle_missing_values():
-    df = pd.DataFrame({
-        "Age": [22, None],
-        "Embarked": ["S", None],
-        "Survived": [1, 0],
-        "Sex": ["male", "female"],
-        "Pclass": [1, 3]
-    })
-    df_processed = preprocess_data(df)
-    assert df_processed.isnull().sum().sum() == 0
+def test_preprocess_data():
+    data = {
+        'Age': [22, None],
+        'Sex': ['male', 'female'],
+        'Embarked': ['S', None],
+        'Name': ['John', 'Jane'],
+        'Survived': [1, 0]
+    }
+    df = pd.DataFrame(data)
+    processed = preprocess_data(df)
+    assert 'Sex_male' in processed.columns
+    assert processed.isnull().sum().sum() == 0
