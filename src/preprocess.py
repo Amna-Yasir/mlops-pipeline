@@ -3,7 +3,8 @@ from sklearn.preprocessing import StandardScaler
 
 def load_data(path='data/titanic.csv'):
     return pd.read_csv(path)
-#preprocessing
+    
+#new preprocessing task
 def preprocess_data(df):
     df = df.drop(['Name', 'Ticket', 'Cabin'], axis=1, errors='ignore')
     df['Age'] = df['Age'].fillna(df['Age'].mean())
